@@ -135,6 +135,26 @@ app.post('/register/booking/classroom', async (req, res) => {
 });
 
 
+app.delete('/register/booking/classroom', async (req, res) => {
+  var {id} = req.body;
+  // console.log(req.body)
+  if (!id) {
+    return res.status(400).json({ message: 'Falta do id.' });
+  }
+
+  try {
+
+    // Insere o novo usuário no banco de dados
+    await pool.query('DELETE FROM rooms WHERE id = '+ id);
+
+    return res.status(201).json({ message: 'Reserva deletada com sucesso.' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Erro ao deletar a reserva.' });
+  }
+});
+
+
 
 // Rota para buscar as reservas
 app.get('/buscar/booking/classroom', async (req, res) => {
