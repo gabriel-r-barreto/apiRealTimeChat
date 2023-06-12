@@ -165,30 +165,30 @@ const io = socketIo(server, {
 
 
 
-let messages = []
+//let messages = []
 
-io.on('connection', (socket) => {
+//io.on('connection', (socket) => {
   // console.log(`Usuário conectado: ${socket.id}`);
 
-  socket.emit('previousMessages', messages);
+  //socket.emit('previousMessages', messages);
 
-  socket.on('chat message', (user, msg) => {
+  //socket.on('chat message', (user, msg) => {
 
 
-    let obj = {
-      "usuario": user,
-      "mesagem": msg
-    }
+   // let obj = {
+    //  "usuario": user,
+    //  "mesagem": msg
+   // }
 
-    messages.push(obj);
+  //  messages.push(obj);
     // console.log(`user: ${user}, message: ${msg}`);
-    io.emit('chat message', user, msg);
-  });
+  //  io.emit('chat message', user, msg);
+  //});
 
-  socket.on('disconnect', () => {
+  //socket.on('disconnect', () => {
     // console.log(`Usuário desconectado: ${socket.id}`);
-  });
-});
+ // });
+//});
 
 const port = process.env.PORT || 3000;
 
