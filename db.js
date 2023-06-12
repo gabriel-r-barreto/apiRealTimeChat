@@ -3,11 +3,11 @@ const mysql = require('mysql2/promise');
 console.log("passou no DB")
 
 const pool = mysql.createPool({
-  host: 'containers-us-west-101.railway.app',
+  host: 'containers-us-west-37.railway.app',
   user: 'root',
-  password: 'vFN6hbTYRIBbVfaqOK7V',
+  password: 'HGTQ4V0CYKFvh2xEvTiz',
   database: 'railway',
-  port: '7797',
+  port: '6383',
   waitForConnections: true,
 });
 

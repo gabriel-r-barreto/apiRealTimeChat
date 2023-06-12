@@ -35,13 +35,15 @@ app.post('/login', async (req, res) => {
     }
 
     // Compara a senha com o hash armazenado no banco de dados
-    const match = await bcrypt.compare(password, rows[0].senha);
-    if (!match) {
+    // const match = await bcrypt.compare(password, rows[0].senha);
+    // console.log(match)
+    if (password === rows[0].senha) {
       return res.status(401).json({ message: 'Email ou senha incorretos.' });
     }
 
     // Gera um token de acesso com o ID do usuário
     const token = jwt.sign({ userId: rows[0].id }, 'segredo', { expiresIn: '1h' });
+    // console.log(token)
 
     return res.json({ token });
   } catch (error) {
@@ -65,10 +67,10 @@ app.post('/register', async (req, res) => {
     }
 
     // Gera o hash da senha
-    const hash = await bcrypt.hash(password, 10);
+    // const hash = await bcrypt.hash(password, 10);
 
     // Insere o novo usuário no banco de dados
-    await pool.query('INSERT INTO users (email, senha) VALUES (?, ?)', [email, hash]);
+    await pool.query('INSERT INTO users (email, password) VALUES (?, ?)', [email, password]);
 
     return res.json({ message: 'Usuário registrado com sucesso.' });
   } catch (error) {
@@ -123,7 +125,7 @@ app.post('/register/booking/classroom', async (req, res) => {
   }
 
     // Insere o novo usuário no banco de dados
-    await pool.query('INSERT INTO rooms (nome, sala, dia) VALUES (?, ?, ?)', [nome,'Laboratório 2',dia]);
+    await pool.query('INSERT INTO rooms (nome, sala, dia) VALUES (?, ?, ?)', [nome,'Laboratório 1',dia]);
 
     return res.status(201).json({ message: 'Reserva feita com sucesso.' });
   } catch (error) {
