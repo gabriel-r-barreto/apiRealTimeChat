@@ -138,14 +138,14 @@ app.post('/register/booking/classroom', async (req, res) => {
 app.delete('/register/booking/classroom/:id', async (req, res) => {
   var {id} = req.params;
   // console.log(req.body)
-  if (!id) {
+  if (!classroomId) {
     return res.status(400).json({ message: 'Falta do id.' });
   }
 
   try {
 
     // Insere o novo usuário no banco de dados
-    await pool.query('DELETE FROM rooms WHERE id = '+ id);
+    await pool.query('DELETE FROM rooms WHERE id = '+ classroomId);
 
     return res.status(201).json({ message: 'Reserva deletada com sucesso.' });
   } catch (error) {
@@ -185,30 +185,30 @@ const io = socketIo(server, {
 
 
 
-let messages = []
+//let messages = []
 
-io.on('connection', (socket) => {
+//io.on('connection', (socket) => {
   // console.log(`Usuário conectado: ${socket.id}`);
 
-  socket.emit('previousMessages', messages);
+  //socket.emit('previousMessages', messages);
 
-  socket.on('chat message', (user, msg) => {
+  //socket.on('chat message', (user, msg) => {
 
 
-    let obj = {
-      "usuario": user,
-      "mesagem": msg
-    }
+   // let obj = {
+    //  "usuario": user,
+    //  "mesagem": msg
+   // }
 
-    messages.push(obj);
+  //  messages.push(obj);
     // console.log(`user: ${user}, message: ${msg}`);
-    io.emit('chat message', user, msg);
-  });
+  //  io.emit('chat message', user, msg);
+  //});
 
-  socket.on('disconnect', () => {
+  //socket.on('disconnect', () => {
     // console.log(`Usuário desconectado: ${socket.id}`);
-  });
-});
+ // });
+//});
 
 const port = process.env.PORT || 3000;
 
