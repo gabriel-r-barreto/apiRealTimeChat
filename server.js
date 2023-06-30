@@ -135,8 +135,8 @@ app.post('/register/booking/classroom', async (req, res) => {
 });
 
 
-app.delete('/register/booking/classroom', async (req, res) => {
-  var {id} = req.query.id;
+app.delete('/register/booking/classroom/:id', async (req, res) => {
+  var {id} = req.params;
   // console.log(req.body)
   if (!id) {
     return res.status(400).json({ message: 'Falta do id.' });
