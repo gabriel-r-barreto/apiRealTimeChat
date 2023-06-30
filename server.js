@@ -138,14 +138,14 @@ app.post('/register/booking/classroom', async (req, res) => {
 app.delete('/register/booking/classroom/:id', async (req, res) => {
   var {id} = req.params;
   // console.log(req.body)
-  if (!classroomId) {
+  if (!id) {
     return res.status(400).json({ message: 'Falta do id.' });
   }
 
   try {
 
     // Insere o novo usuário no banco de dados
-    await pool.query('DELETE FROM rooms WHERE id = '+ classroomId);
+    await pool.query('DELETE FROM rooms WHERE id = '+ id);
 
     return res.status(201).json({ message: 'Reserva deletada com sucesso.' });
   } catch (error) {
