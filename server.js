@@ -135,9 +135,9 @@ app.post('/register/booking/classroom', async (req, res) => {
 });
 
 
-app.delete('/register/booking/:classroomId', async (req, res) => {
-  var {classroomId} = req.params;
-  // console.log(classroomId)
+
+app.delete('/register/booking/classroom', async (req, res) => {
+  var {id} = req.query.id;
   // console.log(req.body)
   if (!classroomId) {
     return res.status(400).json({ message: 'Falta do id.' });
@@ -164,7 +164,7 @@ app.get('/buscar/booking/classroom', async (req, res) => {
     const [rows, fields] = await pool.query('SELECT * FROM rooms');
     
     if (rows.length > 0) {
-      console.log(rows)
+      // console.log(rows)
 
   }
 
